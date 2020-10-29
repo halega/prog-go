@@ -9,11 +9,12 @@ import (
 
 func main() {
 	// An artificial input source.
-	const input = "Now is the winter of our discontent,\nMade glorious summer by this sun of York.\n"
+	const input = "one two  three\tfour\nfive   \"quotes\""
 	count(input)
 	fields(input)
 	utf8symbols(input)
 	words(input)
+	scanWords(input)
 }
 
 func count(s string) {
@@ -43,6 +44,16 @@ func utf8symbols(s string) {
 }
 
 func words(s string) {
-	words := strings.Split("one two  three\tfour\nfive", " ")
+	words := strings.Split(s, " ")
 	fmt.Printf("words = %q\n", words)
+}
+
+func scanWords(s string) {
+	scanner := bufio.NewScanner(strings.NewReader(s))
+	scanner.Split(bufio.ScanWords)
+	fmt.Print("scanner = [ ")
+	for scanner.Scan() {
+		fmt.Printf("%q ", scanner.Text())
+	}
+	fmt.Printf("]\n")
 }
