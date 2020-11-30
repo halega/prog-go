@@ -7,7 +7,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-const resultS = `{
+const wantS = `{
 	"id": 1,
 	"name": "Agent Emulator",
 	"url": "https://jira.com/agent",
@@ -54,13 +54,13 @@ func TestAll(t *testing.T) {
 		{f: bySjson, name: "bySjson"},
 	}
 
-	want := unmarshal([]byte(resultS))
+	want := unmarshal([]byte(wantS))
 	for _, f := range funcs {
-		newS, err := f.f()
+		gotS, err := f.f()
 		if err != nil {
 			t.Errorf("Error on %s(): %s", f.name, err)
 		}
-		got := unmarshal(newS)
+		got := unmarshal(gotS)
 
 		if diff := cmp.Diff(want, got); diff != "" {
 			t.Errorf("%s() mismatch (-want +got):\n%s", f.name, diff)
