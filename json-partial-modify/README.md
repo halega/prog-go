@@ -37,9 +37,7 @@ Modify tasks' urls to full url: from `/1` to `https://jira.com/agent/1`.
 # Output
 
 ```
-C:\sk\prog\prog-go>cd json-partial-modify
-
-C:\sk\prog\prog-go\json-partial-modify>go run .
+C:\sk\prog\prog-go> go run json-partial-modify\main.go
 Source JSON:    
 {
         "id": 1,

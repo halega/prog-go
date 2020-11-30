@@ -49,18 +49,31 @@ type task struct {
 func main() {
 	fmt.Printf("Source JSON:\n%s\n\n", s)
 
-	byStd()
-	byMapStructure()
-	byMapStructurePartial()
-	bySjson()
+	funcs := []struct {
+		f    func() ([]byte, error)
+		name string
+	}{
+		{f: byStd, name: "byStd"},
+		{f: byMapStructure, name: "byMapStructure"},
+		{f: byMapStructurePartial, name: "byMapStructurePartial"},
+		{f: bySjson, name: "bySjson"},
+	}
+	for _, f := range funcs {
+		fmt.Printf("==== %s\n", f.name)
+		newS, err := f.f()
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("%s\n", pretty.Pretty(newS))
+	}
 }
 
 // Uses only standard package encoding/json.
-func byStd() {
-	fmt.Println("==== byStd")
-
+func byStd() ([]byte, error) {
 	var data map[string]interface{}
-	json.Unmarshal([]byte(s), &data)
+	if err := json.Unmarshal([]byte(s), &data); err != nil {
+		return nil, err
+	}
 
 	url := data["url"].(string)
 	for _, v := range data["tasks"].([]interface{}) {
@@ -68,24 +81,27 @@ func byStd() {
 		t["url"] = url + t["url"].(string)
 	}
 
-	newS, _ := json.Marshal(&data)
-	fmt.Printf("%s\n", pretty.Pretty(newS))
+	return json.Marshal(&data)
 }
 
 // Uses package github.com/mitchellh/mapstructure.
-func byMapStructure() {
-	fmt.Println("==== byMapStructure")
-
+func byMapStructure() ([]byte, error) {
 	var data map[string]interface{}
-	json.Unmarshal([]byte(s), &data)
+	if err := json.Unmarshal([]byte(s), &data); err != nil {
+		return nil, err
+	}
 	var p project
-	mapstructure.Decode(data, &p)
+	if err := mapstructure.Decode(data, &p); err != nil {
+		return nil, err
+	}
 	for i := range p.Tasks {
 		p.Tasks[i].URL = p.URL + p.Tasks[i].URL
 	}
 
 	var dataNew map[string]interface{}
-	mapstructure.Decode(p, &dataNew)
+	if err := mapstructure.Decode(p, &dataNew); err != nil {
+		return nil, err
+	}
 
 	// Include Other map into dataNew
 	for k, v := range dataNew[""].(map[string]interface{}) {
@@ -93,19 +109,20 @@ func byMapStructure() {
 	}
 	delete(dataNew, "")
 
-	newS, _ := json.Marshal(&dataNew)
-	fmt.Printf("%s\n", pretty.Pretty(newS))
+	return json.Marshal(&dataNew)
 }
 
 // Uses package github.com/mitchellh/mapstructure on partial data.
-func byMapStructurePartial() {
-	fmt.Println("==== byMapStructurePartial")
-
+func byMapStructurePartial() ([]byte, error) {
 	var data map[string]interface{}
-	json.Unmarshal([]byte(s), &data)
+	if err := json.Unmarshal([]byte(s), &data); err != nil {
+		return nil, err
+	}
 
 	var tasks []task
-	mapstructure.Decode(data["tasks"], &tasks)
+	if err := mapstructure.Decode(data["tasks"], &tasks); err != nil {
+		return nil, err
+	}
 	url := data["url"].(string)
 	for i := range tasks {
 		tasks[i].URL = url + tasks[i].URL
@@ -113,30 +130,24 @@ func byMapStructurePartial() {
 
 	var tasksMap map[string]interface{}
 	if err := mapstructure.Decode(&struct{ Tasks []task }{tasks}, &tasksMap); err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	data["tasks"] = tasksMap["Tasks"]
-	newS, _ := json.Marshal(&data)
-	fmt.Printf("%s\n", pretty.Pretty(newS))
+	return json.Marshal(&data)
 }
 
 // Uses packages github.com/tidwall/gjson and github.com/tidwall/sjson.
-func bySjson() {
-	fmt.Println("==== bySjson")
-
+func bySjson() ([]byte, error) {
 	projURL := gjson.Get(s, "url")
 	t := gjson.Get(s, "tasks")
 	var tasks []task
 	if err := json.Unmarshal([]byte(t.Raw), &tasks); err != nil {
-		panic(err)
+		return nil, err
 	}
 	for i := range tasks {
 		tasks[i].URL = projURL.Str + tasks[i].URL
 	}
 	newS, err := sjson.Set(s, "tasks", &tasks)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("%s\n", pretty.Pretty([]byte(newS)))
+	return []byte(newS), err
 }
