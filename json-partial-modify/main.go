@@ -35,13 +35,13 @@ const s = `{
 	]
 }`
 
-type Project struct {
-	Tasks []Task                 `mapstructure:"tasks"`
+type project struct {
+	Tasks []task                 `mapstructure:"tasks"`
 	URL   string                 `mapstructure:"url"`
 	Other map[string]interface{} `mapstructure:",remain"`
 }
 
-type Task struct {
+type task struct {
 	TaskID int    `mapstructure:"taskId" json:"taskId"`
 	URL    string `mapstructure:"url" json:"url"`
 }
@@ -49,16 +49,36 @@ type Task struct {
 func main() {
 	fmt.Printf("Source JSON:\n%s\n\n", s)
 
+	byStd()
 	byMapStructure()
+	byMapStructurePartial()
 	bySjson()
 }
 
+// Using only package encoding/json
+func byStd() {
+	fmt.Println("==== byStd")
+
+	var data map[string]interface{}
+	json.Unmarshal([]byte(s), &data)
+
+	url := data["url"].(string)
+	for _, v := range data["tasks"].([]interface{}) {
+		t := v.(map[string]interface{})
+		t["url"] = url + t["url"].(string)
+	}
+
+	newS, _ := json.Marshal(&data)
+	fmt.Printf("%s\n", pretty.Pretty(newS))
+}
+
+// Uses package github.com/mitchellh/mapstructure.
 func byMapStructure() {
 	fmt.Println("==== byMapStructure")
 
 	var data map[string]interface{}
 	json.Unmarshal([]byte(s), &data)
-	var p Project
+	var p project
 	mapstructure.Decode(data, &p)
 	for i := range p.Tasks {
 		p.Tasks[i].URL = p.URL + p.Tasks[i].URL
@@ -77,12 +97,37 @@ func byMapStructure() {
 	fmt.Printf("%s\n", pretty.Pretty(newS))
 }
 
+// Uses package github.com/mitchellh/mapstructure on partial data.
+func byMapStructurePartial() {
+	fmt.Println("==== byMapStructurePartial")
+
+	var data map[string]interface{}
+	json.Unmarshal([]byte(s), &data)
+
+	var tasks []task
+	mapstructure.Decode(data["tasks"], &tasks)
+	url := data["url"].(string)
+	for i := range tasks {
+		tasks[i].URL = url + tasks[i].URL
+	}
+
+	var tasksMap map[string]interface{}
+	if err := mapstructure.Decode(&struct{ Tasks []task }{tasks}, &tasksMap); err != nil {
+		panic(err)
+	}
+
+	data["tasks"] = tasksMap["Tasks"]
+	newS, _ := json.Marshal(&data)
+	fmt.Printf("%s\n", pretty.Pretty(newS))
+}
+
+// Uses packages github.com/tidwall/gjson and github.com/tidwall/sjson.
 func bySjson() {
 	fmt.Println("==== bySjson")
 
 	projURL := gjson.Get(s, "url")
 	t := gjson.Get(s, "tasks")
-	var tasks []Task
+	var tasks []task
 	if err := json.Unmarshal([]byte(t.Raw), &tasks); err != nil {
 		panic(err)
 	}
