@@ -33,6 +33,18 @@ Input:
 
 Modify tasks' urls to full url: from `/1` to `https://jira.com/agent/1`.
 
+# Benchmarks
+
+```
+BenchmarkByStd-8
+   55593	     21087 ns/op	    5898 B/op	     132 allocs/op
+BenchmarkByMapStructure-8
+   30272	     39272 ns/op	   10404 B/op	     232 allocs/op
+BenchmarkByMapStructurePartial-8
+   39292	     29995 ns/op	    7987 B/op	     179 allocs/op
+BenchmarkBySjson-8
+  144561	      8551 ns/op	    1968 B/op	      21 allocs/op
+```
 
 # Output
 
