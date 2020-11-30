@@ -47,7 +47,7 @@ type task struct {
 }
 
 func main() {
-	fmt.Printf("Source JSON:\n%s\n\n", s)
+	fmt.Printf("Input:\n%s\n\n", s)
 
 	funcs := []struct {
 		f    func() ([]byte, error)

@@ -65,9 +65,7 @@ func TestAll(t *testing.T) {
 		if diff := cmp.Diff(want, got); diff != "" {
 			t.Errorf("%s() mismatch (-want +got):\n%s", f.name, diff)
 		}
-
 	}
-
 }
 
 func unmarshal(data []byte) *jsonStruct {
