@@ -2,6 +2,38 @@
 
 Modify only partial of JSON.
 
+Input:
+
+```json
+{
+    "id": 1,
+    "name": "Agent Emulator",
+    "url": "https://jira.com/agent",
+    "createdAt": "2020-11-30T17:36:00Z",
+    "tasks": [
+        {
+            "taskId": 1,
+            "url": "/1"
+        },
+        {
+            "taskId": 3,
+            "url": "/3"
+        },
+        {
+            "taskId": 5,
+            "url": "/5"
+        },
+        {
+            "taskId": 2,
+            "url": "/2"
+        }
+    ]
+}
+```
+
+Modify tasks' urls to full url: `"/1" -> "https://jira.com/agent/1"`.
+
+
 # Output
 
 ```
