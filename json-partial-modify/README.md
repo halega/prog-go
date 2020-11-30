@@ -31,7 +31,7 @@ Input:
 }
 ```
 
-Modify tasks' urls to full url: `"/1" -> "https://jira.com/agent/1"`.
+Modify tasks' urls to full url: from `/1` to `https://jira.com/agent/1`.
 
 
 # Output
