@@ -1,6 +1,6 @@
 # Problem
 
-Modify only partial of JSON.
+Modify part of JSON message.
 
 Input:
 
