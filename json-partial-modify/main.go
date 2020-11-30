@@ -55,7 +55,7 @@ func main() {
 	bySjson()
 }
 
-// Using only package encoding/json
+// Uses only standard package encoding/json.
 func byStd() {
 	fmt.Println("==== byStd")
 
