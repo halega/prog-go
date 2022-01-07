@@ -47,3 +47,11 @@ func TestWengrowBubbleSort16(t *testing.T) {
 		t.Errorf("wrong sort results; diff:\n%s", cmp.Diff(nums, sorted))
 	}
 }
+
+func TestWengrowBubbleSort2(t *testing.T) {
+	nums := []int{5, 3, 7, 1, 9, 4, 11, 17, 2, 12, 13, 8, 0, 14, 15, -1}
+	sorted := []int{-1, 0, 1, 2, 3, 4, 5, 7, 8, 9, 11, 12, 13, 14, 15, 17}
+	if t.Log(WengrowBubbleSort2(nums)); !cmp.Equal(nums, sorted) {
+		t.Errorf("wrong sort results; diff:\n%s", cmp.Diff(nums, sorted))
+	}
+}
