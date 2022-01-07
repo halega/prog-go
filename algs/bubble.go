@@ -64,6 +64,7 @@ func WengrowBubbleSort2(list []int) string {
 				list[i], list[i+1] = list[i+1], list[i]
 			}
 		}
+		unsortedUntilIndex--
 	}
 	return trace
 }
