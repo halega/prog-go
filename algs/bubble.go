@@ -48,6 +48,8 @@ func WengrowBubbleSort(list []int) string {
 	return trace
 }
 
+// WengrowBubbleSort2 sorts slice in ascendent order.
+// It uses bubble sort. Time complexity: O(N^2).
 func WengrowBubbleSort2(list []int) string {
 	trace := "" // log of each algorithm step
 	steps := 0

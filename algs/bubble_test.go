@@ -55,3 +55,11 @@ func TestWengrowBubbleSort2(t *testing.T) {
 		t.Errorf("wrong sort results; diff:\n%s", cmp.Diff(nums, sorted))
 	}
 }
+func TestWengrowBubbleSort2WorstCase(t *testing.T) {
+	input := []int{5, 4, 3, 2, 1} // sorted in descendant order
+	expected := []int{1, 2, 3, 4, 5}
+	if t.Log(WengrowBubbleSort2(input)); !cmp.Equal(input, expected) {
+		t.Error("wrong sort result:")
+		t.Error(cmp.Diff(input, expected))
+	}
+}
