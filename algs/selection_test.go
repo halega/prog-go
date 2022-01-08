@@ -13,3 +13,19 @@ func TestSelectionSort(t *testing.T) {
 		t.Errorf("wrong sort order:\n%v", cmp.Diff(input, expected))
 	}
 }
+
+func TestSelectionSortByIsSorted(t *testing.T) {
+	inputs := [][]int{
+		nil,
+		{},
+		{0},
+		{3, 3},
+		{-3, 100, 10},
+		{4, 8, 18},
+	}
+	for _, input := range inputs {
+		if SelectionSort(input); !isSorted(input) {
+			t.Errorf("wrong sorting: %v", input)
+		}
+	}
+}
