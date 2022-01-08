@@ -17,6 +17,7 @@ func TestIsSorted(t *testing.T) {
 		input  []int
 		sorted bool
 	}{
+		{nil, true},
 		{[]int{}, true},
 		{[]int{3}, true},
 		{[]int{4, -1}, false},
