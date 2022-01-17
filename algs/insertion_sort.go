@@ -1,7 +1,7 @@
 package algs
 
-// InsertionSort sorts a slice of ints in an ascending order
-// in-place using insertion sort algorithm.
+// InsertionSort sorts a slice of ints in-place in an ascending order
+// using insertion sort algorithm.
 func InsertionSort(nums []int) {
 	for i := 1; i < len(nums); i++ {
 		t := nums[i]
