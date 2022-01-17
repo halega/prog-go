@@ -10,13 +10,9 @@ func InsertionSort(nums []int) {
 			if nums[j] > t {
 				nums[j+1] = nums[j]
 			} else {
-				nums[j+1] = t
 				break
 			}
 		}
-		// if we reach first element, place temp element there
-		if j == -1 {
-			nums[0] = t
-		}
+		nums[j+1] = t
 	}
 }
