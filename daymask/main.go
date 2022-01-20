@@ -2,12 +2,23 @@
 // Each bit in a daymask represents a day.
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
 
 const daymask = 131072
 
 func main() {
-	days := fmt.Sprintf("%b", daymask)
+	mask := daymask
+	if len(os.Args) == 2 {
+		i, err := strconv.Atoi(os.Args[1])
+		if err == nil {
+			mask = i
+		}
+	}
+	days := fmt.Sprintf("%b", mask)
 	for i := 1; i <= 31; i++ {
 		fmt.Printf("%2d ", i)
 	}
