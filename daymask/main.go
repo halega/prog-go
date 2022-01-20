@@ -1,6 +1,5 @@
-/*
-	Program daymask explains which days are encoded in daymask. Each bit represents a day.
-*/
+// Program daymask shows which days are encoded in daymask.
+// Each bit in a daymask represents a day.
 package main
 
 import "fmt"
