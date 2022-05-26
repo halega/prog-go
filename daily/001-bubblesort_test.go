@@ -1,3 +1,4 @@
+// Daily practice 25.05.2022.
 package daily
 
 import "testing"
