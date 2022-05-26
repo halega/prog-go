@@ -1,4 +1,4 @@
-// Daily practice 27.05.2022.
+// Daily practice
 package daily
 
 import "testing"
