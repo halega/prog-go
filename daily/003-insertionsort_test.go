@@ -7,8 +7,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-// InsertionSort sorts the input in ascending order.
-func InsertionSort(input []int) {
+// InsertionSort1 sorts the input in ascending order.
+func InsertionSort1(input []int) {
 	for i := 1; i < len(input); i++ {
 		removed := input[i]
 		var j int
@@ -26,7 +26,7 @@ func InsertionSort(input []int) {
 func TestInsertionSort1(t *testing.T) {
 	input := []int{1, 0, -1, 4, 2, 2, 10, 3, 4}
 	expected := []int{-1, 0, 1, 2, 2, 3, 4, 4, 10}
-	InsertionSort(input)
+	InsertionSort1(input)
 	if !cmp.Equal(expected, input) {
 		t.Error("want", expected, "but was", input)
 	}
