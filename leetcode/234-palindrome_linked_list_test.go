@@ -1,4 +1,4 @@
-// Daily practice
+// LeetCode problem solution
 // 234. Palindrome Linked List
 // https://leetcode.com/problems/palindrome-linked-list/
 package leetcode
