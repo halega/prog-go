@@ -5,7 +5,7 @@ package leetcode
 
 import "testing"
 
-// 05/27/2022 11:58 Accepted
+// 05/27/2022 11:58 ✅
 // Runtime: 15 ms, faster than 36.16% of Go online submissions for Roman to Integer.
 // Memory Usage: 4.8 MB, less than 5.71% of Go online submissions for Roman to Integer.
 func romanToInt(s string) int {

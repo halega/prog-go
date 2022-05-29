@@ -32,6 +32,9 @@ func newList(vals []int) *ListNode {
 // isPalindrome returns true if the list is a palindrome:
 // 1 -> 2 -> 2 -> 1: true
 // 1 -> 2: false
+// 05/29/2022 08:00 ✅
+// Runtime: 150 ms, faster than 84.59% of Go online submissions for Palindrome Linked List.
+// Memory Usage: 11.2 MB, less than 36.59% of Go online submissions for Palindrome Linked List.
 func isPalindrome(list *ListNode) bool {
 	length := 0
 	cur := list
