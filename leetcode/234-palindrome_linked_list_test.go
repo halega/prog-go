@@ -13,7 +13,7 @@ type ListNode struct {
 }
 
 // newList creates a new list from passed values and
-// returns pointer to its head.
+// returns a pointer to its head.
 func newList(vals []int) *ListNode {
 	var list *ListNode
 	if len(vals) > 0 {
