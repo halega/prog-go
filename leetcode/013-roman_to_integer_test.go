@@ -1,9 +1,11 @@
-// Daily practice
-package daily
+// LeetCode problem solution
+// 13. Roman to Integer
+// https://leetcode.com/problems/roman-to-integer/
+package leetcode
 
 import "testing"
 
-// https://leetcode.com/problems/roman-to-integer/
+// 05/27/2022 11:58 Accepted
 // Runtime: 15 ms, faster than 36.16% of Go online submissions for Roman to Integer.
 // Memory Usage: 4.8 MB, less than 5.71% of Go online submissions for Roman to Integer.
 func romanToInt(s string) int {

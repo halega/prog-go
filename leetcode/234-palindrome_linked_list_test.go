@@ -1,7 +1,7 @@
 // Daily practice
 // 234. Palindrome Linked List
 // https://leetcode.com/problems/palindrome-linked-list/
-package daily
+package leetcode
 
 import (
 	"testing"
@@ -29,10 +29,10 @@ func newList(vals []int) *ListNode {
 	return list
 }
 
-// isPalindrome1 returns true if the list is a palindrome:
+// isPalindrome returns true if the list is a palindrome:
 // 1 -> 2 -> 2 -> 1: true
 // 1 -> 2: false
-func isPalindrome1(list *ListNode) bool {
+func isPalindrome(list *ListNode) bool {
 	length := 0
 	cur := list
 	for cur != nil {
@@ -75,7 +75,7 @@ func reverse(list *ListNode) *ListNode {
 	return prev
 }
 
-func TestIsPalindrome1(t *testing.T) {
+func TestIsPalindrome(t *testing.T) {
 	testData := []struct {
 		vals         []int
 		isPalindrome bool
@@ -85,7 +85,7 @@ func TestIsPalindrome1(t *testing.T) {
 		{[]int{1, 2, 3, 2, 1}, true},
 	}
 	for _, data := range testData {
-		if actual := isPalindrome1(newList(data.vals)); actual != data.isPalindrome {
+		if actual := isPalindrome(newList(data.vals)); actual != data.isPalindrome {
 			t.Errorf("isPalindrome1(%v): want %v, but was %v", data.vals, data.isPalindrome, actual)
 		}
 	}
