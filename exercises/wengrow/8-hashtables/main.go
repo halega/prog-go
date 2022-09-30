@@ -10,5 +10,6 @@ func main() {
 	input := []string{"a", "b", "c", "d", "c", "e", "f"}
 	fmt.Printf("firstDuplicate(%v) = '%s'\n", input, firstDuplicate(input))
 
-	fmt.Println(missingLetter("the quick brown box jumps over a lazy dog"))
+	fmt.Println("missingLetter():", missingLetter("the quick brown box jumps over a lazy dog"))
+	fmt.Println("firstNonDuplicateLetter():", firstNonDuplicateCharacter("minimum"))
 }
