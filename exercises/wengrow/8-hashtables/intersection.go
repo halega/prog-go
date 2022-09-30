@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // intersection returns intersection between a and b slices.
 // Exercise 8.1 of A Common-Sense Guide to Data Structures and Algorithms
 // by Wengrow
@@ -21,8 +19,4 @@ func intersection(a, b []int) []int {
 		result = append(result, interVal)
 	}
 	return result
-}
-
-func main() {
-	fmt.Println(intersection([]int{1, 2, 3, 4, 5}, []int{0, 2, 4, 6, 8}))
 }
