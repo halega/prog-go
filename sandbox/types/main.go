@@ -67,33 +67,13 @@ func mutateP(x **int) {
 	*x = y
 }
 
-func main() {
+func doPointer() {
 	x := new(int)
 	*x = 5
 	mutateP(&x)
 	fmt.Println(*x)
+}
 
-	return
-
-	// fmt.Println(point{}.SayHello(), x)
-
-	type Pet struct {
-		name string
-		age  int
-	}
-
-	// pet2 := Pet{}
-
-	pet := struct {
-		name string
-		age  int
-	}{
-		name: "Jolly",
-		age:  2,
-	}
-
-	pet.name = "Jolly"
-	pet.age = 2
-
-	fmt.Println(pet)
+func main() {
+	do()
 }
