@@ -1,17 +1,28 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"os"
 )
 
 func main() {
-	var num int
-	var s string
-	n, err := fmt.Scanf("%d, %s\n", &num, &s)
+	domain := read()
+	fmt.Println("Your domain is", domain)
+}
+
+func read() string {
+	r := bufio.NewReader(os.Stdin)
+	text, _ := r.ReadString('\n')
+	return text
+}
+
+func readAll() string {
+	b, err := io.ReadAll(os.Stdin)
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		return ""
 	}
-	fmt.Printf("Scanned items: %d, Number: %d, String: %s\n", n, num, s)
+	return string(b)
 }
