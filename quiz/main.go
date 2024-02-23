@@ -2,16 +2,26 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
+const logo = ` _____  _   _  _____  _____
+|  _  || \ | |/  __ \|  ___|
+| | | ||  \| || /  \/| |__
+| | | || . '  || |    |  __|
+\ \_/ /| |\  || \__/\| |___
+ \___/ \_| \_/ \____/\____/`
+
 func main() {
-	var num int
-	var s string
-	n, err := fmt.Scanf("%d, %s\n", &num, &s)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+	fmt.Println(logo)
+	fmt.Println()
+
+	fmt.Println("Enter your domain:")
+	var domain string
+	fmt.Scan(&domain)
+	fmt.Printf("Your domain is %s. Correct? [y/n] ", domain)
+	var answer string
+	fmt.Scan(&answer)
+	if answer == "y" {
+		fmt.Println("Succeed")
 	}
-	fmt.Printf("Scanned items: %d, Number: %d, String: %s\n", n, num, s)
 }
