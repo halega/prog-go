@@ -16,4 +16,6 @@ func main() {
 	fmt.Println("s2:", len(s2), cap(s2))
 
 	fmt.Println(StateCreated, StateRunning, StateCompleted)
+	var s []int
+	fmt.Println(s == nil, len(s))
 }
