@@ -9,12 +9,13 @@ import (
 )
 
 func main() {
-	in := `first_name,last_name,username
+	in := `first_name,last_name,username,grade
 "Rob","Pike",rob
-Ken,Thompson,ken
-"Robert","Griesemer","gri"
+Ken,Thompson,ken,5
+"Robert","Griesemer","gri",5
 `
 	r := csv.NewReader(strings.NewReader(in))
+	r.FieldsPerRecord = -1
 	r.ReuseRecord = true
 
 	for {
