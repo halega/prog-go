@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
+	"os"
 )
 
 const logo = ` _____  _   _  _____  _____
@@ -13,15 +16,21 @@ const logo = ` _____  _   _  _____  _____
 
 func main() {
 	fmt.Println(logo)
-	fmt.Println()
+	domain := read()
+	fmt.Println("Your domain is", domain)
+}
 
-	fmt.Println("Enter your domain:")
-	var domain string
-	fmt.Scan(&domain)
-	fmt.Printf("Your domain is %s. Correct? [y/n] ", domain)
-	var answer string
-	fmt.Scan(&answer)
-	if answer == "y" {
-		fmt.Println("Succeed")
+func read() string {
+	r := bufio.NewReader(os.Stdin)
+	text, _ := r.ReadString('\n')
+	return text
+}
+
+func readAll() string {
+	b, err := io.ReadAll(os.Stdin)
+	if err != nil {
+		fmt.Println(err)
+		return ""
 	}
+	return string(b)
 }
