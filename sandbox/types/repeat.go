@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -38,8 +37,8 @@ func do() {
 	fmt.Println(x, y, z)
 }
 
-func GetCoords() (int, error) {
-	return 0, errors.New("File not found")
+func GetCoords() (int, int, int) {
+	return 0, 0, 0
 }
 
 func PrintString(x *int) bool {
