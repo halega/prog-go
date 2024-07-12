@@ -1,10 +1,19 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
+
+func TestPlay(t *testing.T) {
+	markCount := 0
+	markCount++
+	fmt.Println(markCount)
+	t.Log(markCount)
+	t.Error(markCount)
+}
 
 func TestDate(t *testing.T) {
 	assert.Equal(t, "1984-04-27", "1984-04-27 ", "they should be equal")
